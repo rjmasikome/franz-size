@@ -8,6 +8,7 @@ require (
 	github.com/jcmturner/gokrb5/v8 v8.4.2
 	github.com/knadh/koanf v1.2.3
 	github.com/mitchellh/mapstructure v1.4.2
+	github.com/nakabonne/tstorage v0.2.2
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/twmb/franz-go v0.10.2
 	github.com/twmb/franz-go/pkg/kmsg v0.0.0-20210922170710-c329b1949567

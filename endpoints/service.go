@@ -6,22 +6,15 @@ import (
 )
 
 type Service struct {
-	Cfg         Config
-	logger      *zap.Logger
-	utils       *Utils
-	controllers *Controllers
+	Cfg    Config
+	logger *zap.Logger
 }
 
 func NewService(cfg Config, logger *zap.Logger) *Service {
 
-	utils := NewUtils(cfg, logger)
-	controllers := NewControllers(cfg, logger, utils)
-
 	return &Service{
-		Cfg:         cfg,
-		utils:       utils,
-		controllers: controllers,
-		logger:      logger.Named("kafka_service"),
+		Cfg:    cfg,
+		logger: logger.Named("kafka_service"),
 	}
 }
 
@@ -29,9 +22,9 @@ func (s *Service) Propagate() {
 	router := mux.NewRouter()
 
 	//Pre-flight Endpoints
-	router.PathPrefix("/").HandlerFunc(s.controllers.Ok()).Methods("OPTIONS")
-	router.PathPrefix("/").HandlerFunc(s.controllers.Ok()).Methods("GET")
+	router.PathPrefix("/").HandlerFunc(ok()).Methods("OPTIONS")
+	router.PathPrefix("/").HandlerFunc(ok()).Methods("GET")
 
 	// Unprotected Endpoints
-	router.HandleFunc("/metrics", s.controllers.Ok()).Methods("GET")
+	router.HandleFunc("/metrics", ok()).Methods("GET")
 }
